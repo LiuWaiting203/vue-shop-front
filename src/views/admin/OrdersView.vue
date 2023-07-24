@@ -33,13 +33,13 @@ const orders = ref([]);
 
 (async () => {
   try {
-    const { data } = await apiAuth.get('/orders')
+    const { data } = await apiAuth.get('/orders/all')
     orders.value.push(...data.result.map(order => {
       order.total = order.cart.reduce((total, current) => total + (current.product.price * current.quantity), 0)
       return order
     }))
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     createSnackbar({
       text: error.response.data.message,
       showCloseButton: false,
